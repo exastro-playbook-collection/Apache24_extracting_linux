@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  role_name: Apache24_extracting_linux
+  description: Generate parameters for Apache version 2.4.
+  author: NEC Corporation
+  company: NEC Corporation
+  license: Apache License 2.0
+  min_ansible_version: 2.8
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+  galaxy_tags: []
+  categories: []
+
+dependencies: []

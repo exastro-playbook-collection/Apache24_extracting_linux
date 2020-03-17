@@ -1,0 +1,6 @@
+---
+VAR_Apache_extracting_rolename:
+  # - Apache_install
+  - Apache_setup
+VAR_Apache_gathering_dest: "{{ playbook_dir }}/_gathered_data"
+VAR_Apache_extracting_dest: "{{ playbook_dir }}/_parameters"

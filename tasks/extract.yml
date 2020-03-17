@@ -1,0 +1,19 @@
+---
+- name: check param VAR_Apache_extracting_rolename subElement
+  stat:
+    path: "{{ VAR_Apache_gathering_dest }}/{{ inventory_hostname }}/Apache24_gathering_linux"
+  delegate_to: localhost
+  become: no
+  register: file_exist
+
+- name: parameter_generate run
+  block:
+    # 1-01　Apache設定Roleのパラメータ生成
+    - name: Execute the parameter_generate module for Apache_setup
+      parameter_generate:
+        rolename: "{{ outer_item }}"
+        collect_root: "{{ VAR_Apache_gathering_dest }}/{{ inventory_hostname }}/Apache24_gathering_linux"
+        dest: "{{ VAR_Apache_extracting_dest }}"
+        specific: "python {{ role_path }}/files/Apache_setup.py"
+      when: outer_item == "Apache_setup"
+  when: file_exist.stat.exists != false

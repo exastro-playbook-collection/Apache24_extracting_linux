@@ -1,0 +1,29 @@
+---
+- name: check param VAR_Apache_extracting_rolename is none
+  fail:
+    msg: "Parameter VAR_Apache_extracting_rolename cannot be NULL."
+  when: (VAR_Apache_extracting_rolename is none) or (VAR_Apache_extracting_rolename == '')
+
+- name: check param VAR_Apache_gathering_dest
+  fail:
+    msg: "Parameter VAR_Apache_gathering_dest cannot be NULL."
+  when: (VAR_Apache_gathering_dest is none) or (VAR_Apache_gathering_dest == '')
+
+- name: check param VAR_Apache_extracting_dest
+  fail:
+    msg: "Parameter VAR_Apache_extracting_dest cannot be NULL."
+  when: (VAR_Apache_extracting_dest is none) or (VAR_Apache_extracting_dest == '')
+
+- name: Remove old data
+  file:
+    path: "{{ VAR_Apache_extracting_dest }}/{{ inventory_hostname }}/{{ item }}.yml"
+    state: absent
+  with_items: "{{ VAR_Apache_extracting_rolename }}"
+  delegate_to: localhost
+  become: no
+
+- name: Execute Apache's parameter_generate
+  include_tasks: extract.yml
+  with_items: "{{ VAR_Apache_extracting_rolename }}"
+  loop_control:
+    loop_var: outer_item

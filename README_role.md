@@ -11,7 +11,7 @@
 
 - 管理サーバー（Ansible実行サーバー）
   - OS：RHEL7.4（CentOS7.4）/RHEL8.0（CentOS8.0）
-  - Ansible：Version 2.8
+  - Ansible：Version 2.8, 2.9
   - Python：2.7 or 3.6
 - 対象サーバー
   - 利用しているロール、共通部品の仕様に準拠します。
